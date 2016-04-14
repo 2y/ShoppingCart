@@ -22,6 +22,7 @@ class Item
     private $price;
     private $releaseDate;
     private $stockCount;
+    private $amount;
 
     public function __construct($itemId) {
         $item = $this->items[$itemId];
@@ -41,5 +42,23 @@ class Item
     }
     public function getStockCount() {
         return $this->stockCount;
+    }
+
+    public function setAmount($amount)
+    {
+        if ($this->stockCount < $amount) {
+            throw new \Exception('爆買い禁止');
+        }
+        $this->amount = $amount;
+    }
+
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    public function decrementStockCount()
+    {
+        $this->stockCount -= $this->amount;
     }
 }

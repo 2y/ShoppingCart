@@ -33,4 +33,20 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $stockCount = $item->getStockCount();
         $this->assertEquals($stockCount, 2);
     }
+
+    public function testSetAmount()
+    {
+        $item = new Item($itemId = 100);
+        $item->setAmount(2);
+        $this->assertEquals($item->getAmount(), 2);
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testSetAmountOnError()
+    {
+        $item = new Item($itemId = 100);
+        $item->setAmount(10);
+    }
 }
